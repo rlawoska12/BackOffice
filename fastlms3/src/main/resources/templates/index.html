@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <title>메인 페이지</title>
+    <style>
+
+        .swiper .swiper-slide {
+            display: flex;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>메인 페이지 </h1>
+    <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" th:each="x : ${list}">
+                <a th:if="${x.openMethod == 'new'}" th:href="${x.linkAddress}" target="_blank">
+                    <img th:src="${x.imagePath}"/>
+                </a>
+                <a th:if="${x.openMethod == 'current'}" th:href="${x.linkAddress}">
+                    <img th:src="${x.imagePath}"/>
+                </a>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+<script>
+    new Swiper('.swiper', {
+        autoplay: false,
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 10,
+        centeredSlides: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        navigation: {
+            prevEl: '.swiper-button-prev',
+            nextEl: '.swiper-button-next'
+        }
+    })
+</script>
+</body>
+</html>
